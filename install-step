@@ -1,0 +1,59 @@
+1. docker 설치 : 모든 노드
+ - docs.docker.com > https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+ 
+ 
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update 
+
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+
+2.Kubernetes Install
+
+a.설치 전 환경설정
+
+b.kubeadm, kubectl, kubelet 설치
+	 - 이성미 강사 git허브 : https://github.com/237summit/k8s_core_labs
+
+	1) Swap disabled
+	# swapoff -a && sed -i '/swap/s/^/#/' /etc/fstab
+
+	cat <<EOF > /etc/sysctl.d/k8s.conf
+	net.bridge.bridge-nf-call-ip6tables = 1
+	net.bridge.bridge-nf-call-iptables = 1
+	EOF
+	sysctl --system
+
+	#kubeadm, kubectl, kubelet 설치
+	apt-get update
+	apt-get install -y apt-transport-https ca-certificates curl
+
+	curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+	echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
+
+	apt-get update
+	apt-get install -y kubelet kubeadm kubectl
+	apt-mark hold kubelet kubeadm kubectl
+
+
+c.control-plane 구성
+
+
+
+
+d.worker node 구성
+e.설치확인
+
