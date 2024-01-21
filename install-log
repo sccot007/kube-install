@@ -1,0 +1,340 @@
+root@rb-worker:~/.ssh# apt-get update && apt-get install -y openssh-server curl vim tree
+Hit:1 http://ports.ubuntu.com/ubuntu-ports jammy InRelease
+Hit:2 http://ports.ubuntu.com/ubuntu-ports jammy-updates InRelease
+Hit:3 http://ports.ubuntu.com/ubuntu-ports jammy-backports InRelease
+Hit:4 http://ports.ubuntu.com/ubuntu-ports jammy-security InRelease
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libcurl4 openssh-client openssh-sftp-server vim-common vim-runtime vim-tiny
+Suggested packages:
+  keychain libpam-ssh monkeysphere ssh-askpass molly-guard ctags vim-doc vim-scripts indent
+The following NEW packages will be installed:
+  tree
+The following packages will be upgraded:
+  curl libcurl4 openssh-client openssh-server openssh-sftp-server vim vim-common vim-runtime vim-tiny
+9 upgraded, 1 newly installed, 0 to remove and 108 not upgraded.
+Need to get 11.1 MB of archives.
+After this operation, 117 kB of additional disk space will be used.
+Get:1 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 openssh-sftp-server arm64 1:8.9p1-3ubuntu0.6 [36.8 kB]
+Get:2 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 openssh-server arm64 1:8.9p1-3ubuntu0.6 [414 kB]
+Get:3 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 openssh-client arm64 1:8.9p1-3ubuntu0.6 [864 kB]
+Get:4 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 vim arm64 2:8.2.3995-1ubuntu2.15 [1667 kB]
+Get:5 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 vim-tiny arm64 2:8.2.3995-1ubuntu2.15 [681 kB]
+Get:6 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 vim-runtime all 2:8.2.3995-1ubuntu2.15 [6835 kB]
+Get:7 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 vim-common all 2:8.2.3995-1ubuntu2.15 [81.5 kB]
+Get:8 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 curl arm64 7.81.0-1ubuntu1.15 [190 kB]
+Get:9 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 libcurl4 arm64 7.81.0-1ubuntu1.15 [285 kB]
+Get:10 http://ports.ubuntu.com/ubuntu-ports jammy/universe arm64 tree arm64 2.0.2-1 [47.2 kB]
+Fetched 11.1 MB in 4s (2849 kB/s)
+Preconfiguring packages ...
+(Reading database ... 69724 files and directories currently installed.)
+Preparing to unpack .../0-openssh-sftp-server_1%3a8.9p1-3ubuntu0.6_arm64.deb ...
+Unpacking openssh-sftp-server (1:8.9p1-3ubuntu0.6) over (1:8.9p1-3ubuntu0.3) ...
+Preparing to unpack .../1-openssh-server_1%3a8.9p1-3ubuntu0.6_arm64.deb ...
+Unpacking openssh-server (1:8.9p1-3ubuntu0.6) over (1:8.9p1-3ubuntu0.3) ...
+Preparing to unpack .../2-openssh-client_1%3a8.9p1-3ubuntu0.6_arm64.deb ...
+Unpacking openssh-client (1:8.9p1-3ubuntu0.6) over (1:8.9p1-3ubuntu0.3) ...
+Preparing to unpack .../3-vim_2%3a8.2.3995-1ubuntu2.15_arm64.deb ...
+Unpacking vim (2:8.2.3995-1ubuntu2.15) over (2:8.2.3995-1ubuntu2.10) ...
+Preparing to unpack .../4-vim-tiny_2%3a8.2.3995-1ubuntu2.15_arm64.deb ...
+Unpacking vim-tiny (2:8.2.3995-1ubuntu2.15) over (2:8.2.3995-1ubuntu2.10) ...
+Preparing to unpack .../5-vim-runtime_2%3a8.2.3995-1ubuntu2.15_all.deb ...
+Unpacking vim-runtime (2:8.2.3995-1ubuntu2.15) over (2:8.2.3995-1ubuntu2.10) ...
+Preparing to unpack .../6-vim-common_2%3a8.2.3995-1ubuntu2.15_all.deb ...
+Unpacking vim-common (2:8.2.3995-1ubuntu2.15) over (2:8.2.3995-1ubuntu2.10) ...
+Preparing to unpack .../7-curl_7.81.0-1ubuntu1.15_arm64.deb ...
+Unpacking curl (7.81.0-1ubuntu1.15) over (7.81.0-1ubuntu1.13) ...
+Preparing to unpack .../8-libcurl4_7.81.0-1ubuntu1.15_arm64.deb ...
+Unpacking libcurl4:arm64 (7.81.0-1ubuntu1.15) over (7.81.0-1ubuntu1.13) ...
+Selecting previously unselected package tree.
+Preparing to unpack .../9-tree_2.0.2-1_arm64.deb ...
+Unpacking tree (2.0.2-1) ...
+Setting up openssh-client (1:8.9p1-3ubuntu0.6) ...
+Setting up vim-common (2:8.2.3995-1ubuntu2.15) ...
+Setting up tree (2.0.2-1) ...
+Setting up libcurl4:arm64 (7.81.0-1ubuntu1.15) ...
+Setting up curl (7.81.0-1ubuntu1.15) ...
+Setting up vim-runtime (2:8.2.3995-1ubuntu2.15) ...
+Setting up openssh-sftp-server (1:8.9p1-3ubuntu0.6) ...
+Setting up vim (2:8.2.3995-1ubuntu2.15) ...
+Setting up openssh-server (1:8.9p1-3ubuntu0.6) ...
+rescue-ssh.target is a disabled or a static unit not running, not starting it.
+ssh.socket is a disabled or a static unit not running, not starting it.
+Setting up vim-tiny (2:8.2.3995-1ubuntu2.15) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+Processing triggers for ufw (0.36.1-4ubuntu0.1) ...
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...                                                                                                            
+Scanning candidates...                                                                                                           
+Scanning processor microcode...                                                                                                  
+Scanning linux images...                                                                                                         
+
+Running kernel seems to be up-to-date.
+
+Failed to check for processor microcode upgrades.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+root@rb-worker:~/.ssh# sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update 
+
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+Hit:1 http://ports.ubuntu.com/ubuntu-ports jammy InRelease
+Get:2 http://ports.ubuntu.com/ubuntu-ports jammy-updates InRelease [119 kB]
+Hit:3 http://ports.ubuntu.com/ubuntu-ports jammy-backports InRelease
+Get:4 http://ports.ubuntu.com/ubuntu-ports jammy-security InRelease [110 kB]
+Fetched 229 kB in 3s (74.9 kB/s)   
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ca-certificates is already the newest version (20230311ubuntu0.22.04.1).
+ca-certificates set to manually installed.
+curl is already the newest version (7.81.0-1ubuntu1.15).
+gnupg is already the newest version (2.2.27-3ubuntu2.1).
+gnupg set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 108 not upgraded.
+Get:1 https://download.docker.com/linux/ubuntu jammy InRelease [48.8 kB]
+Get:2 https://download.docker.com/linux/ubuntu jammy/stable arm64 Packages [23.3 kB]
+Hit:3 http://ports.ubuntu.com/ubuntu-ports jammy InRelease
+Hit:4 http://ports.ubuntu.com/ubuntu-ports jammy-updates InRelease
+Hit:5 http://ports.ubuntu.com/ubuntu-ports jammy-backports InRelease
+Hit:6 http://ports.ubuntu.com/ubuntu-ports jammy-security InRelease
+Fetched 72.2 kB in 2s (31.1 kB/s)
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  docker-ce-rootless-extras libltdl7 libslirp0 pigz slirp4netns
+Suggested packages:
+  cgroupfs-mount | cgroup-lite
+The following NEW packages will be installed:
+  containerd.io docker-buildx-plugin docker-ce docker-ce-cli docker-ce-rootless-extras docker-compose-plugin libltdl7 libslirp0 p
+0 upgraded, 10 newly installed, 0 to remove and 108 not upgraded.
+Need to get 93.4 MB of archives.
+After this operation, 360 MB of additional disk space will be used.
+Get:1 https://download.docker.com/linux/ubuntu jammy/stable arm64 containerd.io arm64 1.6.27-1 [21.3 MB]
+Get:2 http://ports.ubuntu.com/ubuntu-ports jammy/universe arm64 pigz arm64 2.6-1 [55.7 kB]
+Get:3 http://ports.ubuntu.com/ubuntu-ports jammy/main arm64 libltdl7 arm64 2.4.6-15build2 [39.5 kB]
+Get:4 http://ports.ubuntu.com/ubuntu-ports jammy/main arm64 libslirp0 arm64 4.6.1-1build1 [60.8 kB]
+Get:5 http://ports.ubuntu.com/ubuntu-ports jammy/universe arm64 slirp4netns arm64 1.0.1-2 [27.0 kB]
+Get:6 https://download.docker.com/linux/ubuntu jammy/stable arm64 docker-buildx-plugin arm64 0.12.1-1~ubuntu.22.04~jammy [25.8 MB
+Get:7 https://download.docker.com/linux/ubuntu jammy/stable arm64 docker-ce-cli arm64 5:25.0.0-1~ubuntu.22.04~jammy [12.4 MB]
+Get:8 https://download.docker.com/linux/ubuntu jammy/stable arm64 docker-ce arm64 5:25.0.0-1~ubuntu.22.04~jammy [14.8 MB]
+Get:9 https://download.docker.com/linux/ubuntu jammy/stable arm64 docker-ce-rootless-extras arm64 5:25.0.0-1~ubuntu.22.04~jammy [
+Get:10 https://download.docker.com/linux/ubuntu jammy/stable arm64 docker-compose-plugin arm64 2.24.1-1~ubuntu.22.04~jammy [10.4 
+Fetched 93.4 MB in 8s (11.8 MB/s)                                                                                                
+Selecting previously unselected package pigz.
+(Reading database ... 69732 files and directories currently installed.)
+Preparing to unpack .../0-pigz_2.6-1_arm64.deb ...
+Unpacking pigz (2.6-1) ...
+Selecting previously unselected package containerd.io.
+Preparing to unpack .../1-containerd.io_1.6.27-1_arm64.deb ...
+Unpacking containerd.io (1.6.27-1) ...
+Selecting previously unselected package docker-buildx-plugin.
+Preparing to unpack .../2-docker-buildx-plugin_0.12.1-1~ubuntu.22.04~jammy_arm64.deb ...
+Unpacking docker-buildx-plugin (0.12.1-1~ubuntu.22.04~jammy) ...
+Selecting previously unselected package docker-ce-cli.
+Preparing to unpack .../3-docker-ce-cli_5%3a25.0.0-1~ubuntu.22.04~jammy_arm64.deb ...
+Unpacking docker-ce-cli (5:25.0.0-1~ubuntu.22.04~jammy) ...
+Selecting previously unselected package docker-ce.
+Preparing to unpack .../4-docker-ce_5%3a25.0.0-1~ubuntu.22.04~jammy_arm64.deb ...
+Unpacking docker-ce (5:25.0.0-1~ubuntu.22.04~jammy) ...
+Selecting previously unselected package docker-ce-rootless-extras.
+Preparing to unpack .../5-docker-ce-rootless-extras_5%3a25.0.0-1~ubuntu.22.04~jammy_arm64.deb ...
+Unpacking docker-ce-rootless-extras (5:25.0.0-1~ubuntu.22.04~jammy) ...
+Selecting previously unselected package docker-compose-plugin.
+Preparing to unpack .../6-docker-compose-plugin_2.24.1-1~ubuntu.22.04~jammy_arm64.deb ...
+Unpacking docker-compose-plugin (2.24.1-1~ubuntu.22.04~jammy) ...
+Selecting previously unselected package libltdl7:arm64.
+Preparing to unpack .../7-libltdl7_2.4.6-15build2_arm64.deb ...
+Unpacking libltdl7:arm64 (2.4.6-15build2) ...
+Selecting previously unselected package libslirp0:arm64.
+Preparing to unpack .../8-libslirp0_4.6.1-1build1_arm64.deb ...
+Unpacking libslirp0:arm64 (4.6.1-1build1) ...
+Selecting previously unselected package slirp4netns.
+Preparing to unpack .../9-slirp4netns_1.0.1-2_arm64.deb ...
+Unpacking slirp4netns (1.0.1-2) ...
+Setting up docker-buildx-plugin (0.12.1-1~ubuntu.22.04~jammy) ...
+Setting up containerd.io (1.6.27-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Setting up docker-compose-plugin (2.24.1-1~ubuntu.22.04~jammy) ...
+Setting up libltdl7:arm64 (2.4.6-15build2) ...
+Setting up docker-ce-cli (5:25.0.0-1~ubuntu.22.04~jammy) ...
+Setting up libslirp0:arm64 (4.6.1-1build1) ...
+Setting up pigz (2.6-1) ...
+Setting up docker-ce-rootless-extras (5:25.0.0-1~ubuntu.22.04~jammy) ...
+Setting up slirp4netns (1.0.1-2) ...
+Setting up docker-ce (5:25.0.0-1~ubuntu.22.04~jammy) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /lib/systemd/system/docker.service.
+Created symlink /etc/systemd/system/sockets.target.wants/docker.socket → /lib/systemd/system/docker.socket.
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+Scanning processes...                                                                                                            
+Scanning candidates...                                                                                                           
+Scanning processor microcode...                                                                                                  
+Scanning linux images...                                                                                                         
+
+Running kernel seems to be up-to-date.
+
+Failed to check for processor microcode upgrades.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+root@rb-worker:~/.ssh# nc 127.0.0.1 6443
+root@rb-worker:~/.ssh# swapoff -a && sed -i '/swap/s/^/#/' /etc/fstab
+root@rb-worker:~/.ssh# cat <<EOF > /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sysctl --system
+
+
+systemctl stop firewalld 
+systemctl disable firewalld
+* Applying /etc/sysctl.d/10-console-messages.conf ...
+kernel.printk = 4 4 1 7
+* Applying /etc/sysctl.d/10-ipv6-privacy.conf ...
+net.ipv6.conf.all.use_tempaddr = 2
+net.ipv6.conf.default.use_tempaddr = 2
+* Applying /etc/sysctl.d/10-kernel-hardening.conf ...
+kernel.kptr_restrict = 1
+* Applying /etc/sysctl.d/10-magic-sysrq.conf ...
+kernel.sysrq = 176
+* Applying /etc/sysctl.d/10-network-security.conf ...
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.all.rp_filter = 2
+* Applying /etc/sysctl.d/10-ptrace.conf ...
+kernel.yama.ptrace_scope = 1
+* Applying /etc/sysctl.d/10-zeropage.conf ...
+vm.mmap_min_addr = 32768
+* Applying /usr/lib/sysctl.d/50-default.conf ...
+kernel.core_uses_pid = 1
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.default.accept_source_route = 0
+sysctl: setting key "net.ipv4.conf.all.accept_source_route": Invalid argument
+net.ipv4.conf.default.promote_secondaries = 1
+sysctl: setting key "net.ipv4.conf.all.promote_secondaries": Invalid argument
+net.ipv4.ping_group_range = 0 2147483647
+net.core.default_qdisc = fq_codel
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+fs.protected_regular = 1
+fs.protected_fifos = 1
+* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+kernel.pid_max = 4194304
+* Applying /etc/sysctl.d/99-cloudimg-ipv6.conf ...
+net.ipv6.conf.all.use_tempaddr = 0
+net.ipv6.conf.default.use_tempaddr = 0
+* Applying /usr/lib/sysctl.d/99-protect-links.conf ...
+fs.protected_fifos = 1
+fs.protected_hardlinks = 1
+fs.protected_regular = 2
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+* Applying /etc/sysctl.d/k8s.conf ...
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+* Applying /etc/sysctl.conf ...
+Failed to stop firewalld.service: Unit firewalld.service not loaded.
+Failed to disable unit: Unit file firewalld.service does not exist.
+root@rb-worker:~/.ssh# apt-get update
+apt-get install -y apt-transport-https ca-certificates curl
+
+curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
+
+apt-get update
+apt-get install -y kubelet kubeadm kubectl
+apt-mark hold kubelet kubeadm kubectl
+Hit:1 https://download.docker.com/linux/ubuntu jammy InRelease
+Hit:2 http://ports.ubuntu.com/ubuntu-ports jammy InRelease
+Get:3 http://ports.ubuntu.com/ubuntu-ports jammy-updates InRelease [119 kB]
+Hit:4 http://ports.ubuntu.com/ubuntu-ports jammy-backports InRelease
+Get:5 http://ports.ubuntu.com/ubuntu-ports jammy-security InRelease [110 kB]
+Fetched 229 kB in 3s (71.4 kB/s)   
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ca-certificates is already the newest version (20230311ubuntu0.22.04.1).
+curl is already the newest version (7.81.0-1ubuntu1.15).
+The following NEW packages will be installed:
+  apt-transport-https
+0 upgraded, 1 newly installed, 0 to remove and 108 not upgraded.
+Need to get 1510 B of archives.
+After this operation, 170 kB of additional disk space will be used.
+Get:1 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe arm64 apt-transport-https all 2.4.11 [1510 B]
+Fetched 1510 B in 1s (2736 B/s)              
+Selecting previously unselected package apt-transport-https.
+(Reading database ... 69999 files and directories currently installed.)
+Preparing to unpack .../apt-transport-https_2.4.11_all.deb ...
+Unpacking apt-transport-https (2.4.11) ...
+Setting up apt-transport-https (2.4.11) ...
+Scanning processes...                                                                                                           
+Scanning candidates...                                                                                                          
+Scanning processor microcode...                                                                                                 
+Scanning linux images...                                                                                                        
+
+Running kernel seems to be up-to-date.
+
+Failed to check for processor microcode upgrades.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main
+Hit:1 https://download.docker.com/linux/ubuntu jammy InRelease
+Hit:3 http://ports.ubuntu.com/ubuntu-ports jammy InRelease
+Hit:4 http://ports.ubuntu.com/ubuntu-ports jammy-updates InRelease
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [8993 B]
+Hit:5 http://ports.ubuntu.com/ubuntu-ports jammy-backports InRelease
+Hit:6 http://ports.ubuntu.com/ubuntu-ports jammy-security InRelease
+Err:2 https://packages.cloud.google.com/apt kubernetes-xenial InRelease
+  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY B53DC80D13EDEF05
+Reading package lists... Done
+W: GPG error: https://packages.cloud.google.com/apt kubernetes-xenial InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY B53DC80D13EDEF05
+E: The repository 'https://apt.kubernetes.io kubernetes-xenial InRelease' is not signed.
+N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+N: See apt-secure(8) manpage for repository creation and user configuration details.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+E: Unable to locate package kubelet
+E: Unable to locate package kubeadm
+E: Unable to locate package kubectl
+E: Unable to locate package kubelet
+E: Unable to locate package kubeadm
+E: Unable to locate package kubectl
+E: No packages found
+root@rb-worker:~/.ssh#
