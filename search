@@ -1,1 +1,91 @@
-ㅊ
+1.chronyd 
+2.cgroup개념
+
+#설치 유투브
+https://www.youtube.com/watch?v=Wr6nrBRqYYE&list=PLbkeo0MyuahMfS9igIsWpLVXV-G_bg8dC&index=10&t=22s
+
+apt update -y
+apt install -y chrony
+swapoff -a && sed -i '/swap/s/^/#/' /etc/fstab
+reboot
+
+
+#필수 요소들 설치 및 구성하기
+https://kubernetes.io/ko/docs/setup/production-environment/container-runtimes/
+
+#container run time 설치
+apt install -y containerd
+
+#cgroup 설정 변경
+ - 폴더생성
+mkdir -p /etc/containerd
+
+ - 기본환경파일 생성
+containerd config default | sudo tee /etc/containerd/config.toml
+
+ - 환경파일 수정
+ .............
+ SystemdCgroup = false -> SystemdCgroup = true 로 변경
+ ..............
+ 
+ - 변경 후 재시작
+ systemctl restart containerd.service
+ systemctl status containerd.service
+ 
+ 
+ 
+ 
+ #kubeadm, kubectl, kubelet 설치
+ 
+ 
+ 
+ 버전확인
+ root@rb-master:/etc/containerd# apt-cache madison kubeadm
+   kubeadm | 1.29.1-1.1 | https://pkgs.k8s.io/core:/stable:/v1.29/deb  Packages
+   kubeadm | 1.29.0-1.1 | https://pkgs.k8s.io/core:/stable:/v1.29/deb  Packages
+ root@rb-master:/etc/containerd# apt-get install -y kubelet=1.29.1-1.1 kubeadm=1.29.1-1.1 kubectl=1.29.1-1.1
+ 
+ 
+ #칼리코 설치
+ https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart
+ 
+ mkdir cni
+ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
+ 하기전에 파일 내용을 검증하기 위해
+ wget https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
+ 내용 수정
+ ........
+ cidr: 192.168.0.0/16 ---> cidr:10.1.0.0/16
+ .........
+ 
+ 
+ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
+ 하기전에 파일 내용을 검증하기 위해
+ wget https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
+ 
+ 자, 이제 설치를 진행합니다.
+ 
+ kubectl create -f tigera-operator.yaml
+ kubectl create -f custom-resources.yaml
+ 
+ kubectl get all -n calico-system
+ 
+ 30:42초
+ root@rb-master:~/cni# kubectl create -f custom-resources.yaml 
+installation.operator.tigera.io/default created
+apiserver.operator.tigera.io/default created
+root@rb-master:~/cni# kubectl get ns
+
+NAME              STATUS   AGE
+default           Active   26m
+kube-node-lease   Active   26m
+kube-public       Active   26m
+kube-system       Active   26m
+tigera-operator   Active   4m59s
+root@rb-master:~/cni# 
+root@rb-master:~/cni# 
+
+현재 calico-system namespace가 설치 안됨
+
+
+
