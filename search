@@ -9,6 +9,34 @@ apt install -y chrony
 swapoff -a && sed -i '/swap/s/^/#/' /etc/fstab
 reboot
 
+# Kubernetes 설치
+
+1. root 비밀번호 설정
+- sudo passwd root
+
+> ssh 서버 설치 후 운영
+> 
+- apt-get update && apt-get install -y openssh-server curl vim tree
+- apt-get update && apt-get install -y socat conntrack ebtables ipset
+- systemctl status sshd              << 위 프로그램이 잘 설치가 되었는지 확인하는 명령어
+- 먼저 root로 vi /etc/hostname 변경
+- vi /etc/hosts 추가
+- 
+
+> ssh key generate
+> 
+
+#ssh-keygen
+ssh-keygen -t rsa
+touch ~/.ssh/authorized_keys
+chmod 755 ~/.ssh/authorized_keys
+
+> swap disabled
+> 
+- `swapoff -a && sed -i '/swap/s/^/#/' /etc/fstab`
+- reboot
+
+# Container Runner 설치(master, woker 둘다)
 
 #필수 요소들 설치 및 구성하기
 https://kubernetes.io/ko/docs/setup/production-environment/container-runtimes/
@@ -17,75 +45,110 @@ https://kubernetes.io/ko/docs/setup/production-environment/container-runtimes/
 apt install -y containerd
 
 #cgroup 설정 변경
- - 폴더생성
+
+- 폴더생성
 mkdir -p /etc/containerd
-
- - 기본환경파일 생성
+- 기본환경파일 생성
 containerd config default | sudo tee /etc/containerd/config.toml
+- 환경파일 수정
 
- - 환경파일 수정
- .............
- SystemdCgroup = false -> SystemdCgroup = true 로 변경
- ..............
- 
- - 변경 후 재시작
- systemctl restart containerd.service
- systemctl status containerd.service
- 
- 
- 
- 
- #kubeadm, kubectl, kubelet 설치
- 
- 
- 
- 버전확인
- root@rb-master:/etc/containerd# apt-cache madison kubeadm
-   kubeadm | 1.29.1-1.1 | https://pkgs.k8s.io/core:/stable:/v1.29/deb  Packages
-   kubeadm | 1.29.0-1.1 | https://pkgs.k8s.io/core:/stable:/v1.29/deb  Packages
- root@rb-master:/etc/containerd# apt-get install -y kubelet=1.29.1-1.1 kubeadm=1.29.1-1.1 kubectl=1.29.1-1.1
- 
- 
- #칼리코 설치
- https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart
- 
- mkdir cni
- kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
- 하기전에 파일 내용을 검증하기 위해
- wget https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
- 내용 수정
- ........
- cidr: 192.168.0.0/16 ---> cidr:10.1.0.0/16
- .........
- 
- 
- kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
- 하기전에 파일 내용을 검증하기 위해
- wget https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
- 
- 자, 이제 설치를 진행합니다.
- 
- kubectl create -f tigera-operator.yaml
- kubectl create -f custom-resources.yaml
- 
- kubectl get all -n calico-system
- 
- 30:42초
- root@rb-master:~/cni# kubectl create -f custom-resources.yaml 
-installation.operator.tigera.io/default created
-apiserver.operator.tigera.io/default created
-root@rb-master:~/cni# kubectl get ns
+vi /etc/containerd/config.toml
+.............
+SystemdCgroup = false -> SystemdCgroup = true 로 변경
+..............
 
-NAME              STATUS   AGE
-default           Active   26m
-kube-node-lease   Active   26m
-kube-public       Active   26m
-kube-system       Active   26m
-tigera-operator   Active   4m59s
-root@rb-master:~/cni# 
-root@rb-master:~/cni# 
+- 변경 후 재시작
+systemctl restart containerd.service
+systemctl status containerd.service
 
-현재 calico-system namespace가 설치 안됨
+# kubernetes 설치(master, woker 둘다)
+
+#kubeadm, kubectl, kubelet 설치
+
+(참고) https://v1-28.docs.kubernetes.io/ko/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+
+```
+apt-get update
+
+apt-get install -y apt-transport-https ca-certificates curl gpg
+
+(kubernetes documentation에서 영문버전으로 확인할것)
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+apt-get update
+
+버전확인
+root@rb-master:~# apt-cache madison kubeadm
+   kubeadm | 1.28.6-1.1 | https://pkgs.k8s.io/core:/stable:/v1.28/deb  Packages
+   kubeadm | 1.28.5-1.1 | https://pkgs.k8s.io/core:/stable:/v1.28/deb  Packages
+   kubeadm | 1.28.4-1.1 | https://pkgs.k8s.io/core:/stable:/v1.28/deb  Packages
+   kubeadm | 1.28.3-1.1 | https://pkgs.k8s.io/core:/stable:/v1.28/deb  Packages
+   kubeadm | 1.28.2-1.1 | https://pkgs.k8s.io/core:/stable:/v1.28/deb  Packages
+   kubeadm | 1.28.1-1.1 | https://pkgs.k8s.io/core:/stable:/v1.28/deb  Packages
+   kubeadm | 1.28.0-1.1 | https://pkgs.k8s.io/core:/stable:/v1.28/deb  Packages
+ root@rb-master:/etc/containerd# apt-get install -y kubelet=1.28.6-1.1 kubeadm=1.28.6-1.1 kubectl=1.28.6-1.1
+
+apt-mark hold kubelet kubeadm kubectl
+
+```
+
+# **Master 컴포넌트 구성및 네트워크 환경구성(master)**
+
+<aside>
+💡 kubeadm init --apiserver-advertise-address 172.30.1.95 --pod-network-cidr=10.1.0.0/16
+
+</aside>
+
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+chown $(id -u):$(id -g) $HOME/.kube/config
+
+<aside>
+💡 WORKER node에서 실행
+
+kubeadm join 172.30.1.95:6443 --token nhojn9.fvb6735exa9bb2g8 \
+--discovery-token-ca-cert-hash sha256:041afad12c845c5e073bbd4946c4a923bdddb5c658363094826453e128b21685
+
+</aside>
+
+root@rb-master:~# mkdir -p $HOME/.kube
+root@rb-master:~# cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+root@rb-master:~# chown $(id -u):$(id -g) $HOME/.kube/config
+root@rb-master:~# kubectl get nodes
+NAME        STATUS     ROLES           AGE     VERSION
+rb-master   NotReady   control-plane   8m47s   v1.28.6
+root@rb-master:~# kubectl get nodes
+NAME        STATUS     ROLES           AGE     VERSION
+rb-master   NotReady   control-plane   9m29s   v1.28.6
+rb-worker   NotReady   <none>          6s      v1.28.6
+
+# Calico 설치 (master)
+
+(참고사이트)
+
+https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart
+
+mkdir cni
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
+하기전에 파일 내용을 검증하기 위해
+wget https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
+내용 수정
+........
+cidr: 192.168.0.0/16 ---> cidr:10.1.0.0/16
+.........
+
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
+하기전에 파일 내용을 검증하기 위해
+wget https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
+
+자, 이제 설치를 진행합니다.
+
+kubectl create -f tigera-operator.yaml
+kubectl create -f custom-resources.yaml
+
+kubectl get all -n calico-system
 
 
 
